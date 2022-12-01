@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  /*основная особенность outline – в том, что при наличии outline-offset 
+  или без него – он не занимает места в блоке. Поэтому его часто используют 
+  для стилей :hover и других аналогичных, когда нужно выделить элемент, но 
+  чтобы ничего при этом не прыгало.*/
+  outline: none;
+}
+body {
+  font-family: Roboto, -apple-system, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.todo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 750px;
+  height: 530px;
+  transform: translate(-50%, -50%);
+  /*свойство transform позволяет вам поворачивать, масштабировать, наклонять 
+  или сдвигать элемент. для любых элементов position: fixed; или position: absolute; 
+  которые он содержит. все элементы, шаблоны которых регулируются блочной моделью CSS,
+   кроме : неизменяемые инлайновые блоки, блоки таблица-колонка.
+   translate(x,y) Сдвигает элемент на новое место, перемещая относительно обычного 
+   положения вправо и вниз, используя координаты X и Y, не затрагивая при этом соседние 
+   элементы. Если нужно сдвинуть элемент влево или вверх, то нужно использовать 
+   отрицательные значения.*/
+  background-color: #7adbf6;
+  box-shadow: 1px 1px 20px #61dafb;
+  border-radius: 10px;
+  &__sidebar {
+    width: 200px;
+    height: 100%;
+    border-right: 1px solid #f1f1f1;
+  }
+}
