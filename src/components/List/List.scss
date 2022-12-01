@@ -1,0 +1,26 @@
+.list {
+  li {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    cursor: pointer;
+    &.active {
+      background-color: #61dafb;
+      box-shadow: 0 2px 10px #39bfec;
+      border-radius: 4px;
+    }
+    picture {
+      &.iconTasks img {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        opacity: 0.7;
+        color: #7adbf6;
+        border-radius: 50%;
+      }
+    }
+  }
+  li:first-child {
+    margin-bottom: 30px;
+  }
+}
