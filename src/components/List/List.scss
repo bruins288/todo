@@ -1,27 +1,24 @@
 .list {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  &__addText {
+    span {
+      color: #767676;
+    }
+    &:hover {
+      span {
+        color: black;
+      }
+    }
+  }
   li {
     display: flex;
     align-items: center;
-    padding: 10px 12px;
+    padding: 8px 12px;
     cursor: pointer;
     &.active {
       background-color: #61dafb;
       box-shadow: 0 2px 10px #39bfec;
       border-radius: 4px;
-    }
-    picture {
-      width: 20px;
-      height: 20px;
-      margin-right: 10px;
-      &.iconTasks img {
-        width: 20px;
-        height: 20px;
-        margin-right: 10px;
-        opacity: 0.7;
-        color: #7adbf6;
-        border-radius: 50%;
-      }
     }
   }
 }

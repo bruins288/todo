@@ -1,0 +1,29 @@
+.add-list {
+  position: relative;
+  &__popup {
+    position: absolute;
+    top: 50px;
+    right: 5px;
+    width: 85%;
+    height: 130px;
+    background-color: #b2eaf9;
+    box-shadow: 0 1px 5px #6dc4e1;
+    border-radius: 10px;
+    padding: 18px;
+    text-align: center;
+
+    .button,
+    .field {
+      width: 100%;
+    }
+    .field {
+      margin-left: -10px;
+    }
+  }
+  &__popup-close {
+    position: absolute;
+    top: -10px;
+    right: -5px;
+    cursor: pointer;
+  }
+}

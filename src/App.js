@@ -1,5 +1,7 @@
 import React from "react";
-import List from "./components/List/index.jsx";
+
+import List from "./components/List";
+import AddList from "./components/AddList";
 
 function App() {
   return (
@@ -14,7 +16,9 @@ function App() {
               active: true,
             },
           ]}
-          isRemovable={true}
+          /*только для булевых значений можно передать одно имя свойства 
+          в хорошей практике ставится вниз после всех свойств значений*/
+          isRemovable
         />
         <List
           items={[
@@ -39,8 +43,9 @@ function App() {
               allTasksId: 1,
             },
           ]}
-          isRemovable={true}
+          isRemovable
         />
+        <AddList />
       </div>
       <div className="todo__tasks"></div>
     </div>
