@@ -1,0 +1,46 @@
+{
+  "lists" :[
+    {"id":1, "name":"Фронтенд", "iconId":1},
+    {"id":2, "name":"Фильмы и сериалы", "iconId":2},
+    {"id":3, "name":"Книги", "iconId":3},
+    {"id":4, "name":"Дети", "iconId":4},
+    {"id":5, "name":"Личное", "iconId":5}
+  ],
+  "tasks":[
+    {"id":1, "text":"Изучить HTML5","listID":1},
+    {"id":2, "text":"Изучить CSS3","listID":1},    
+    {"id":3, "text":"Изучить JavaScript","listID":1},
+    {"id":4, "text":"Изучить React","listID":1},
+    {"id":5, "text":"Изучить паттерны проектирования","listID":1},
+    {"id":6, "text":"Посмотреть фильм Игра престолов","listID":2},
+    {"id":7, "text":"Начать читать Познакомьтесь JavaScript Кайл Симпсон, 2-е издание","listID":3},
+    {"id":8, "text":"Поиграть с детьми","listID":4},
+    {"id":9, "text":"Сделать с детьми уроки","listID":4},
+    {"id":10, "text":"Отправить документы в ФНС по налоговому вычету","listID":5}
+  ],
+  "addTasks":[
+    {"id":1, "text":"Изучить семантические тэги", "taskId":1 },
+    {"id":2, "text":"Изучить адаптивную верстку", "taskId":2 },
+    {"id":3, "text":"Изучить SCSS", "taskId":2 },
+    {"id":4, "text":"Изучить что такое замыкание и как применять", "taskId":3 },
+    {"id":5, "text":"Изучить тип Date и как с ним работать", "taskId":3 },
+    {"id":6, "text":"Изучить коллекции Map, Set и как с ними работать", "taskId":3 },
+    {"id":7, "text":"Изучить тип Promise и как с ним работать", "taskId":3 },
+    {"id":8, "text":"Изучить ReactJS Hooks (useState, useEffect, useContext и т.д.)", "taskId":4 },
+    {"id":9, "text":"Изучить React Router", "taskId":4 },
+    {"id":10, "text":"Изучить Redux (thunk, saga, observable)", "taskId":4 },    
+    {"id":11, "text":"Изучить MobX (observe, observable, action, computed, override)", "taskId":4 }
+  ],
+  "icons":[
+    {"id":1, "iconFileName":"react.webp", "name":"react"},
+    {"id":2, "iconFileName":"films.webp", "name":"films"},
+    {"id":3, "iconFileName":"books.webp", "name":"books"},
+    {"id":4, "iconFileName":"childs.webp", "name":"childs"},
+    {"id":5, "iconFileName":"personals.webp", "name":"personals"},
+    {"id":6, "iconFileName":"cars.webp", "name":"cars"},
+    {"id":7, "iconFileName":"hotel.webp", "name":"hotel"},
+    {"id":8, "iconFileName":"meet.webp", "name":"meet"},
+    {"id":9, "iconFileName":"notes.webp", "name":"notes"},
+    {"id":10, "iconFileName":"sports.png", "name":"sports"}
+  ]
+}

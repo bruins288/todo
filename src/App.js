@@ -2,8 +2,36 @@ import React from "react";
 
 import List from "./components/List";
 import AddList from "./components/AddList";
+import Tasks from "./components/Tasks";
+
+import DB from "./assets/data.json";
+import { getNewId } from "./utils.js";
 
 function App() {
+  const [lists, setLists] = React.useState(
+    DB.lists.map((item) => {
+      item.iconFileName = DB.icons
+        .filter((icon) => icon.id === item.iconId)
+        .shift().iconFileName;
+      return item;
+    })
+  );
+  const [icons, setIcons] = React.useState(
+    DB.icons.reduce((acc, icon) => {
+      if (!DB.lists.some((list) => list.iconId === icon.id)) acc.push(icon);
+      return acc;
+    }, [])
+  );
+
+  const onAddList = (list) => {
+    let newList = [...lists, list];
+    setLists(newList);
+  };
+  const removeIcon = (iconId) => {
+    let newIcons = [...icons].filter((icon) => icon.id !== iconId);
+    setIcons(newIcons);
+  };
+
   return (
     <div className="todo">
       <div className="todo__sidebar">
@@ -16,38 +44,24 @@ function App() {
               active: true,
             },
           ]}
-          /*только для булевых значений можно передать одно имя свойства 
-          в хорошей практике ставится вниз после всех свойств значений*/
-          isRemovable
         />
+        {/* только для булевых значений можно передать одно имя свойства 
+          в хорошей практике ставится вниз после всех свойств значений*/}
         <List
-          items={[
-            {
-              id: 1,
-              name: "Фронтенд",
-              iconFileName: "react.webp",
-              allTasksId: 1,
-            },
-            {
-              id: 2,
-              name: "Фильмы и сериалы",
-              iconFileName: "films.webp",
-              allTasksId: 1,
-            },
-            { id: 3, name: "Книги", iconFileName: "books.webp", allTasksId: 1 },
-            { id: 4, name: "Дети", iconFileName: "childs.webp", allTasksId: 1 },
-            {
-              id: 5,
-              name: "Личное",
-              iconFileName: "personals.webp",
-              allTasksId: 1,
-            },
-          ]}
+          items={lists}
+          onRemove={(item) => console.log(item)}
           isRemovable
         />
-        <AddList />
+        <AddList
+          icons={icons}
+          newId={getNewId(lists)}
+          onAdd={onAddList}
+          removeIcon={removeIcon}
+        />
       </div>
-      <div className="todo__tasks"></div>
+      <div className="todo__tasks">
+        <Tasks />
+      </div>
     </div>
   );
 }

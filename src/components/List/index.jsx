@@ -5,7 +5,13 @@ import Icon from "../Icon";
 
 import "./List.scss";
 
-function List({ items, isRemovable, onClick }) {
+function List({ items, isRemovable, onClick, onRemove }) {
+  const removeList = (item) => {
+    if (window.confirm("Вы действительно хотите удалить список?")) {
+      onRemove(item);
+    }
+  };
+
   return (
     <ul className="list" onClick={onClick}>
       {/* Указание ключа обязательно он указывает React какой конкретно элемент в случае
@@ -17,6 +23,14 @@ function List({ items, isRemovable, onClick }) {
         >
           <Icon iconFileName={item.iconFileName} name={item.name} />
           <span>{item.name}</span>
+          {isRemovable && (
+            <Icon
+              iconFileName={"close.png"}
+              name="удаление"
+              className="list__remove-icon"
+              onClick={() => removeList(item)}
+            />
+          )}
         </li>
       ))}
     </ul>

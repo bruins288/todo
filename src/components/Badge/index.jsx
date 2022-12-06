@@ -4,9 +4,7 @@ import Icon from "../Icon";
 
 import "./Badge.scss";
 
-function Badge({ icons }) {
-  const [selectedIcon, setSelectIcon] = React.useState(null);
-
+function Badge({ icons, selected, setSelect }) {
   return (
     <div className="badge">
       {icons.map((icon) => (
@@ -14,8 +12,8 @@ function Badge({ icons }) {
           key={icon.id}
           iconFileName={icon.iconFileName}
           name={icon.name}
-          onClick={() => setSelectIcon(icon.id)}
-          className={selectedIcon === icon.id ? "active" : ""}
+          onClick={() => setSelect(icon.id)}
+          className={selected === icon.id ? "active" : ""}
         />
       ))}
     </div>

@@ -1,0 +1,41 @@
+.tasks {
+  &__title {
+    color: #316378;
+    font-family: Montserrat;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 39px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #23697c;
+    cursor: pointer;
+    &:hover {
+      img {
+        opacity: 0.4;
+      }
+    }
+    &__edit-icon {
+      opacity: 0;
+      width: 20px !important;
+      height: 20px !important;
+      margin-left: 15px;
+      vertical-align: middle;
+    }
+  }
+  .checkbox {
+    input {
+      display: none;
+    }
+    label {
+      display: inline-block;
+      border: 2px solid #b2eaf9;
+      border-radius: 30px;
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+    }
+    input:checked + label {
+      background-color: green;
+      border-color: green;
+    }
+  }
+}
