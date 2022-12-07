@@ -21,21 +21,59 @@
       vertical-align: middle;
     }
   }
+  &__items {
+    margin-top: 30px;
+    &-row {
+      display: flex;
+      align-items: center;
+    }
+    input {
+      width: 100%;
+      background-color: #b2eaf9;
+      border: 0;
+      padding: 8px 12px;
+      border-radius: 5px;
+    }
+  }
   .checkbox {
+    padding: 8px 12px;
     input {
       display: none;
     }
     label {
-      display: inline-block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       border: 2px solid #b2eaf9;
       border-radius: 30px;
-      width: 25px;
-      height: 25px;
+      width: 20px;
+      height: 20px;
       cursor: pointer;
+      transition: background-color 0.15s ease-in-out;
+      svg {
+        opacity: 0;
+      }
     }
     input:checked + label {
-      background-color: green;
-      border-color: green;
+      background-color: lightgreen;
+      border-color: lightgreen;
+      svg {
+        opacity: 1;
+        path {
+          stroke: white;
+        }
+      }
+    }
+  }
+
+  .checkbox:hover {
+    label {
+      svg {
+        opacity: 1;
+        path {
+          stroke: wheat;
+        }
+      }
     }
   }
 }
