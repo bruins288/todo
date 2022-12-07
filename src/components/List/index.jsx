@@ -1,5 +1,6 @@
 import React from "react";
 import classNames from "classnames";
+import axios from "axios";
 
 import Icon from "../Icon";
 
@@ -8,6 +9,7 @@ import "./List.scss";
 function List({ items, isRemovable, onClick, onRemove }) {
   const removeList = (item) => {
     if (window.confirm("Вы действительно хотите удалить список?")) {
+      axios.delete("http://localhost:4000/lists/" + item.id);
       onRemove(item);
     }
   };

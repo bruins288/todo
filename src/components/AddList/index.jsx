@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 import List from "../List";
 import Badge from "../Badge";
@@ -6,21 +7,16 @@ import Icon from "../Icon";
 
 import "./AddList.scss";
 
-import { getNewId } from "../../utils.js";
-
 function AddList({ icons, onAdd, removeIcon }) {
   const [visiblePopup, setVisiblePopup] = React.useState(false);
   const [selectedIcon, setSelectedIcon] = React.useState(
     Array.isArray(icons) ? icons[0].id : null
   );
   const [inputValue, setInputValue] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
     if (Array.isArray(icons)) setSelectedIcon(icons[0].id);
-  }, [icons]);
-
-  const newId = React.useMemo(() => {
-    if (Array.isArray(icons)) getNewId(icons);
   }, [icons]);
 
   const onSelected = (id) => {
@@ -32,18 +28,24 @@ function AddList({ icons, onAdd, removeIcon }) {
       alert("Введите название списка");
       return;
     }
-    const iconFileName = icons
-      .filter((icon) => icon.id === selectedIcon)
-      .shift();
-
-    onAdd({
-      id: newId,
-      name: inputValue,
-      iconFileNameId: selectedIcon,
-      iconFileName,
-    });
-    removeIcon(selectedIcon);
-    onClose();
+    setIsLoading(true);
+    axios
+      .post("http://localhost:4000/lists", {
+        name: inputValue,
+        iconFileNameId: selectedIcon,
+      })
+      .then(({ data }) => {
+        let iconFileName = icons
+          .filter((icon) => icon.id === selectedIcon)
+          .shift();
+        let newList = { ...data, iconFileName };
+        onAdd(newList);
+        removeIcon(selectedIcon);
+        onClose();
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const onClose = () => {
@@ -87,7 +89,7 @@ function AddList({ icons, onAdd, removeIcon }) {
             />
           )}
           <button className="button" type="button" onClick={addList}>
-            Добавить
+            {isLoading ? "Добавление..." : "Добавить"}
           </button>
         </div>
       )}
