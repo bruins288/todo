@@ -1,34 +1,40 @@
 import React from "react";
+import axios from "axios";
 
-import List from "./components/List";
-import AddList from "./components/AddList";
-import Tasks from "./components/Tasks";
-
-import DB from "./assets/data.json";
-import { getNewId } from "./utils.js";
+import { List, AddList, Tasks } from "./components";
 
 function App() {
-  const [lists, setLists] = React.useState(
-    DB.lists.map((item) => {
-      item.iconFileName = DB.icons
-        .filter((icon) => icon.id === item.iconId)
-        .shift().iconFileName;
-      return item;
-    })
-  );
-  const [icons, setIcons] = React.useState(
-    DB.icons.reduce((acc, icon) => {
-      if (!DB.lists.some((list) => list.iconId === icon.id)) acc.push(icon);
-      return acc;
-    }, [])
-  );
+  const [lists, setLists] = React.useState(null);
+  const [icons, setIcons] = React.useState(null);
+
+  React.useEffect(() => {
+    axios
+      .get("http://localhost:4000/lists?_expand=iconFileName")
+      .then(({ data }) => {
+        setLists(data);
+      });
+    axios.get("http://localhost:4000/iconFileNames").then(({ data }) => {
+      setIcons(data);
+    });
+  }, []);
+
+  const getRemainIcons = () => {
+    if (Array.isArray(lists) && Array.isArray(icons)) {
+      return icons.reduce((acc, icon) => {
+        if (!lists.some((list) => list.iconFileNameId === icon.id)) {
+          acc.push(icon);
+        }
+        return acc;
+      }, []);
+    }
+  };
 
   const onAddList = (list) => {
     let newList = [...lists, list];
     setLists(newList);
   };
-  const removeIcon = (iconId) => {
-    let newIcons = [...icons].filter((icon) => icon.id !== iconId);
+  const removeIcon = (iconFileNameId) => {
+    let newIcons = [...icons].filter((icon) => icon.id !== iconFileNameId);
     setIcons(newIcons);
   };
 
@@ -40,21 +46,24 @@ function App() {
             {
               id: 1,
               name: "Все задачи",
-              iconFileName: "alltasks.png",
+              iconFileName: { id: 1, fileName: "alltasks.png" },
               active: true,
             },
           ]}
         />
         {/* только для булевых значений можно передать одно имя свойства 
           в хорошей практике ставится вниз после всех свойств значений*/}
-        <List
-          items={lists}
-          onRemove={(item) => console.log(item)}
-          isRemovable
-        />
+        {!Array.isArray(lists) ? (
+          "Загрузка"
+        ) : (
+          <List
+            items={lists}
+            onRemove={(item) => console.log(item)}
+            isRemovable
+          />
+        )}
         <AddList
-          icons={icons}
-          newId={getNewId(lists)}
+          icons={getRemainIcons()}
           onAdd={onAddList}
           removeIcon={removeIcon}
         />

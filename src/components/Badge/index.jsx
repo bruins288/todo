@@ -10,7 +10,7 @@ function Badge({ icons, selected, setSelect }) {
       {icons.map((icon) => (
         <Icon
           key={icon.id}
-          iconFileName={icon.iconFileName}
+          fileName={icon.fileName}
           name={icon.name}
           onClick={() => setSelect(icon.id)}
           className={selected === icon.id ? "active" : ""}

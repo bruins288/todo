@@ -2,25 +2,19 @@ import React from "react";
 
 import "./Icon.scss";
 
-function Icon({ iconFileName, name, className, onClick }) {
+function Icon({ fileName, name, className, onClick }) {
   const srcDefault = "https://via.placeholder.com/25X25";
 
   return (
     <picture className="iconTasks">
       <source
         srcSet={
-          iconFileName
-            ? require(`../../assets/icons/${iconFileName}`)
-            : srcDefault
+          fileName ? require(`../../assets/icons/${fileName}`) : srcDefault
         }
         type="image/webp"
       />
       <img
-        src={
-          iconFileName
-            ? require(`../../assets/icons/${iconFileName}`)
-            : srcDefault
-        }
+        src={fileName ? require(`../../assets/icons/${fileName}`) : srcDefault}
         alt={`${name} иконка`}
         title={`${name} иконка`}
         onClick={onClick}

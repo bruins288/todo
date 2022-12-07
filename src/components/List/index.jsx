@@ -21,11 +21,11 @@ function List({ items, isRemovable, onClick, onRemove }) {
           key={index}
           className={classNames(item.className, { active: item.active })}
         >
-          <Icon iconFileName={item.iconFileName} name={item.name} />
+          <Icon fileName={item.iconFileName.fileName} name={item.name} />
           <span>{item.name}</span>
           {isRemovable && (
             <Icon
-              iconFileName={"close.png"}
+              fileName={"close.png"}
               name="удаление"
               className="list__remove-icon"
               onClick={() => removeList(item)}

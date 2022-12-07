@@ -6,13 +6,21 @@ import Icon from "../Icon";
 
 import "./AddList.scss";
 
-function AddList({ icons, newId, onAdd, removeIcon }) {
+import { getNewId } from "../../utils.js";
+
+function AddList({ icons, onAdd, removeIcon }) {
   const [visiblePopup, setVisiblePopup] = React.useState(false);
-  const [selectedIcon, setSelectedIcon] = React.useState(icons[0].id);
+  const [selectedIcon, setSelectedIcon] = React.useState(
+    Array.isArray(icons) ? icons[0].id : null
+  );
   const [inputValue, setInputValue] = React.useState("");
 
   React.useEffect(() => {
-    setSelectedIcon(icons[0].id);
+    if (Array.isArray(icons)) setSelectedIcon(icons[0].id);
+  }, [icons]);
+
+  const newId = React.useMemo(() => {
+    if (Array.isArray(icons)) getNewId(icons);
   }, [icons]);
 
   const onSelected = (id) => {
@@ -26,12 +34,12 @@ function AddList({ icons, newId, onAdd, removeIcon }) {
     }
     const iconFileName = icons
       .filter((icon) => icon.id === selectedIcon)
-      .shift().iconFileName;
+      .shift();
 
     onAdd({
       id: newId,
       name: inputValue,
-      iconId: selectedIcon,
+      iconFileNameId: selectedIcon,
       iconFileName,
     });
     removeIcon(selectedIcon);
@@ -51,7 +59,7 @@ function AddList({ icons, newId, onAdd, removeIcon }) {
           {
             id: 1,
             name: "Добавить список",
-            iconFileName: "add.png",
+            iconFileName: { id: 1, fileName: "add.png" },
             className: "list__addText",
           },
         ]}
@@ -59,7 +67,7 @@ function AddList({ icons, newId, onAdd, removeIcon }) {
       {visiblePopup && (
         <div className="add-list__popup">
           <Icon
-            iconFileName={"close.png"}
+            fileName={"close.png"}
             name="закрытие списка"
             className="add-list__popup-close"
             onClick={onClose}
@@ -71,7 +79,13 @@ function AddList({ icons, newId, onAdd, removeIcon }) {
             value={inputValue}
             onChange={(event) => setInputValue(event.target.value)}
           />
-          <Badge icons={icons} selected={selectedIcon} setSelect={onSelected} />
+          {Array.isArray(icons) && (
+            <Badge
+              icons={icons}
+              selected={selectedIcon}
+              setSelect={onSelected}
+            />
+          )}
           <button className="button" type="button" onClick={addList}>
             Добавить
           </button>
