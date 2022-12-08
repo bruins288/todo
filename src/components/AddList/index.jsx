@@ -14,7 +14,6 @@ function AddList({ icons, onAdd, removeIcon }) {
   );
   const [inputValue, setInputValue] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
-
   React.useEffect(() => {
     if (Array.isArray(icons)) setSelectedIcon(icons[0].id);
   }, [icons]);

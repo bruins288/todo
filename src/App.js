@@ -9,7 +9,7 @@ function App() {
 
   React.useEffect(() => {
     axios
-      .get("http://localhost:4000/lists?_expand=iconFileName")
+      .get("http://localhost:4000/lists?_expand=iconFileName&_embed=tasks")
       .then(({ data }) => {
         setLists(data);
       });
@@ -18,7 +18,7 @@ function App() {
     });
   }, []);
 
-  const getRemainIcons = () => {
+  const getRemainIcons = React.useMemo(() => {
     if (Array.isArray(lists) && Array.isArray(icons)) {
       return icons.reduce((acc, icon) => {
         if (!lists.some((list) => list.iconFileNameId === icon.id)) {
@@ -27,7 +27,7 @@ function App() {
         return acc;
       }, []);
     }
-  };
+  }, [lists, icons]);
 
   const onAddList = (list) => {
     let newList = [...lists, list];
@@ -35,6 +35,10 @@ function App() {
   };
   const removeIcon = (iconFileNameId) => {
     let newIcons = [...icons].filter((icon) => icon.id !== iconFileNameId);
+    setIcons(newIcons);
+  };
+  const addIcon = (icon) => {
+    let newIcons = [...icons, icon];
     setIcons(newIcons);
   };
 
@@ -58,18 +62,22 @@ function App() {
         ) : (
           <List
             items={lists}
-            onRemove={(item) => console.log(item)}
+            onRemove={(id) => {
+              let newList = lists.filter((item) => item.id !== id);
+              setLists(newList);
+            }}
+            addIcon={addIcon}
             isRemovable
           />
         )}
         <AddList
-          icons={getRemainIcons()}
+          icons={getRemainIcons}
           onAdd={onAddList}
           removeIcon={removeIcon}
         />
       </div>
       <div className="todo__tasks">
-        <Tasks />
+        {!Array.isArray(lists) ? "Загрузка.." : <Tasks list={lists[0]} />}
       </div>
     </div>
   );

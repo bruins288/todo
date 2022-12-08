@@ -6,11 +6,13 @@ import Icon from "../Icon";
 
 import "./List.scss";
 
-function List({ items, isRemovable, onClick, onRemove }) {
+function List({ items, isRemovable, onClick, onRemove, addIcon }) {
   const removeList = (item) => {
     if (window.confirm("Вы действительно хотите удалить список?")) {
-      axios.delete("http://localhost:4000/lists/" + item.id);
-      onRemove(item);
+      axios.delete("http://localhost:4000/lists/" + item.id).then(() => {
+        onRemove(item.id);
+        addIcon(item.iconFileName);
+      });
     }
   };
 
