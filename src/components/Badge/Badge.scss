@@ -1,9 +1,19 @@
 .badge {
-  margin-top: 15px;
+  display: flex;
+  margin-top: 10px;
   margin-bottom: 10px;
   text-align: center;
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: auto;
+  box-sizing: border-box;
+
+  scrollbar-width: var(--scrollbarHeight);
+  scrollbar-color: var(--scrollbarThumb) var(--scrollbarBg);
+
   picture {
     margin-right: 25px;
+
     img {
       width: 30px;
       height: 30px;
@@ -11,6 +21,9 @@
       color: #7adbf6;
       border-radius: 50%;
       transition: 0.5s;
+      margin-bottom: 6px;
+      margin-top: 5px;
+      margin-left: 3px;
       cursor: pointer;
       &.active {
         transform: scale(1.2);
@@ -24,4 +37,22 @@
       margin-right: 0;
     }
   }
+}
+.badge::-webkit-scrollbar {
+  width: var(--scrollbarWidth);
+}
+.badge::-webkit-scrollbar-track {
+  background: var(--scrollbarBg);
+  border-radius: var(--scrollbarBorderRadius);
+}
+.badge::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbarThumb);
+  border-radius: var(--scrollbarBorderRadius);
+  border: var(--scrollbarBorder);
+}
+.badge-with-scroll {
+  height: 60px;
+}
+.badge-without-scroll {
+  height: 40px;
 }

@@ -23,6 +23,14 @@
   }
   &__items {
     margin-top: 30px;
+    h3 {
+      font-family: Montserrat;
+      font-weight: bold;
+      font-size: 25px;
+      color: #8fa2a7;
+      text-align: center;
+      margin-top: 192px;
+    }
     &-row {
       display: flex;
       align-items: center;
@@ -73,6 +81,35 @@
         path {
           stroke: wheat;
         }
+      }
+    }
+  }
+  .tasks-form {
+    margin-top: 20px;
+    &__new {
+      display: flex;
+      align-items: center;
+      opacity: 0.8;
+      padding: 8px 12px;
+      cursor: pointer;
+      span {
+        font-size: 14px;
+        opacity: 0.4;
+        margin-left: 10px;
+      }
+      &:hover {
+        span {
+          opacity: 0.8;
+        }
+      }
+    }
+    &__block {
+      text-align: right;
+      .button {
+        margin-right: 10px;
+      }
+      .field {
+        margin-bottom: 15px;
       }
     }
   }

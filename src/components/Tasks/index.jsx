@@ -1,10 +1,25 @@
 import React from "react";
+import axios from "axios";
 
 import Icon from "../Icon";
+import AddTaskForm from "./AddTaskForm";
 
 import "./Tasks.scss";
 
-function Tasks({ list }) {
+function Tasks({ list, onEditTitle, onAddTask }) {
+  const editTitle = () => {
+    let newTitle = window.prompt("Название списка", list.name);
+    if (newTitle) {
+      axios
+        .patch("http://localhost:4000/lists/" + list.id, {
+          name: newTitle,
+        })
+        .then(() => onEditTitle(list.id, newTitle))
+        .catch(() => {
+          alert("Не удалось обновить название списка");
+        });
+    }
+  };
   return (
     <div className="tasks">
       <h2 className="tasks__title">
@@ -13,9 +28,11 @@ function Tasks({ list }) {
           fileName="edit.webp"
           name="редактировать"
           className="tasks__title__edit-icon"
+          onClick={editTitle}
         />
       </h2>
       <div className="tasks__items">
+        {!list.tasks.length && <h3>Задачи отсутствуют</h3>}
         {list.tasks.map((task) => (
           <div className="tasks__items-row" key={task.id}>
             <div className="checkbox">
@@ -41,6 +58,9 @@ function Tasks({ list }) {
             <input type="text" defaultValue={task.text} />
           </div>
         ))}
+        <div className="tasks-form">
+          <AddTaskForm list={list} onAddTask={onAddTask} />
+        </div>
       </div>
     </div>
   );

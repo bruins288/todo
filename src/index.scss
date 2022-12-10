@@ -1,4 +1,11 @@
-$height: calc(600px - 120px);
+$height: calc(620px - 120px);
+:root {
+  --scrollbarBg: #6dc4e1;
+  --scrollbarThumb: #b2eaf9;
+  --scrollbarWidth: 10px;
+  --scrollbarBorder: 3px solid var(--scrollbarBg);
+  --scrollbarBorderRadius: calc(var(--scrollbarWidth) / 2);
+}
 * {
   margin: 0;
   padding: 0;
@@ -21,7 +28,7 @@ body {
   left: 50%;
   top: 50%;
   width: 1000px;
-  height: 600px;
+  height: 620px;
   transform: translate(-50%, -50%);
   /*свойство transform позволяет вам поворачивать, масштабировать, наклонять 
   или сдвигать элемент. для любых элементов position: fixed; или position: absolute; 
@@ -47,9 +54,13 @@ body {
   }
 }
 .button,
-.field {
+.field,
+.button-grey {
   padding: 8px 12px;
   border-radius: 5px;
+}
+.button,
+.field {
   box-shadow: 0px 1px 5px #23697c;
 }
 .button {
@@ -71,5 +82,17 @@ body {
     border-color: #b3e5f6;
     box-shadow: 1px 2px 10px #23697c;
     background-color: white;
+  }
+}
+.button-grey {
+  background-color: #b2eaf9;
+  border: 0;
+  box-shadow: 0px 1px 5px #23697c;
+  &:hover {
+    cursor: pointer;
+    background: darken($color: #6dc4e1, $amount: 6);
+  }
+  &:active {
+    transform: scale(0.97);
   }
 }

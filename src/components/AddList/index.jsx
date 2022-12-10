@@ -7,7 +7,7 @@ import Icon from "../Icon";
 
 import "./AddList.scss";
 
-function AddList({ icons, onAdd, removeIcon }) {
+function AddList({ icons, onAdd }) {
   const [visiblePopup, setVisiblePopup] = React.useState(false);
   const [selectedIcon, setSelectedIcon] = React.useState(
     Array.isArray(icons) ? icons[0].id : null
@@ -39,7 +39,6 @@ function AddList({ icons, onAdd, removeIcon }) {
           .shift();
         let newList = { ...data, iconFileName };
         onAdd(newList);
-        removeIcon(selectedIcon);
         onClose();
       })
       .finally(() => {
@@ -58,9 +57,9 @@ function AddList({ icons, onAdd, removeIcon }) {
         onClick={() => setVisiblePopup(true)}
         items={[
           {
-            id: 1,
+            id: 101,
             name: "Добавить список",
-            iconFileName: { id: 1, fileName: "add.png" },
+            iconFileName: { id: 101, fileName: "add.png" },
             className: "list__addText",
           },
         ]}

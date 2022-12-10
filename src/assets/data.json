@@ -24,6 +24,11 @@
       "id": 5,
       "name": "Личное",
       "iconFileNameId": 5
+    },
+    {
+      "name": "Дневник",
+      "iconFileNameId": 9,
+      "id": 6
     }
   ],
   "tasks": [
@@ -86,6 +91,18 @@
       "text": "Отправить документы в ФНС по налоговому вычету",
       "listId": 5,
       "completed": false
+    },
+    {
+      "text": "ssss",
+      "listId": 6,
+      "completed": false,
+      "id": 11
+    },
+    {
+      "text": "ssss",
+      "listId": 4,
+      "completed": false,
+      "id": 12
     }
   ],
   "addTasks": [

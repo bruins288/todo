@@ -6,6 +6,7 @@ import { List, AddList, Tasks } from "./components";
 function App() {
   const [lists, setLists] = React.useState(null);
   const [icons, setIcons] = React.useState(null);
+  const [activeItem, setActiveItem] = React.useState(null);
 
   React.useEffect(() => {
     axios
@@ -18,39 +19,37 @@ function App() {
     });
   }, []);
 
-  const getRemainIcons = React.useMemo(() => {
-    if (Array.isArray(lists) && Array.isArray(icons)) {
-      return icons.reduce((acc, icon) => {
-        if (!lists.some((list) => list.iconFileNameId === icon.id)) {
-          acc.push(icon);
-        }
-        return acc;
-      }, []);
-    }
-  }, [lists, icons]);
-
   const onAddList = (list) => {
     let newList = [...lists, list];
     setLists(newList);
   };
-  const removeIcon = (iconFileNameId) => {
-    let newIcons = [...icons].filter((icon) => icon.id !== iconFileNameId);
-    setIcons(newIcons);
+  const onEditListTitle = (id, title) => {
+    const newList = lists.map((item) => {
+      if (item.id === id) {
+        item.name = title;
+      }
+      return item;
+    });
+    setLists(newList);
   };
-  const addIcon = (icon) => {
-    let newIcons = [...icons, icon];
-    setIcons(newIcons);
+  const onAddTask = (listId, newTask) => {
+    let newLists = lists.map((item) => {
+      if (item.id === listId) {
+        item.tasks = [...item.tasks, newTask];
+      }
+      return item;
+    });
+    setLists(newLists);
   };
-
   return (
     <div className="todo">
       <div className="todo__sidebar">
         <List
           items={[
             {
-              id: 1,
+              id: 100,
               name: "Все задачи",
-              iconFileName: { id: 1, fileName: "alltasks.png" },
+              iconFileName: { id: 100, fileName: "alltasks.png" },
               active: true,
             },
           ]}
@@ -66,18 +65,21 @@ function App() {
               let newList = lists.filter((item) => item.id !== id);
               setLists(newList);
             }}
-            addIcon={addIcon}
+            onClickItem={(item) => setActiveItem(item)}
+            activeItem={activeItem}
             isRemovable
           />
         )}
-        <AddList
-          icons={getRemainIcons}
-          onAdd={onAddList}
-          removeIcon={removeIcon}
-        />
+        <AddList icons={icons} onAdd={onAddList} />
       </div>
       <div className="todo__tasks">
-        {!Array.isArray(lists) ? "Загрузка.." : <Tasks list={lists[0]} />}
+        {lists && activeItem && (
+          <Tasks
+            list={activeItem}
+            onEditTitle={onEditListTitle}
+            onAddTask={onAddTask}
+          />
+        )}
       </div>
     </div>
   );
