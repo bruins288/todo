@@ -48,7 +48,7 @@
       "id": 3,
       "text": "Изучить JavaScript",
       "listId": 1,
-      "completed": true
+      "completed": false
     },
     {
       "id": 4,
@@ -95,7 +95,7 @@
     {
       "text": "Записать расписание Акробатики",
       "listId": 6,
-      "completed": false,
+      "completed": true,
       "id": 15
     }
   ],

@@ -1,0 +1,74 @@
+.home {
+  flex: 1;
+  margin: 20px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #b2eaf9;
+  box-shadow: 0px 1px 5px #23697c;
+  h1 {
+    color: #316378;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 39px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #23697c;
+    text-align: center;
+    font-family: Montserrat;
+  }
+  h2 {
+    color: #316378;
+    font-weight: bold;
+    font-size: 25px;
+    text-align: left;
+    margin-bottom: 10px;
+    font-family: Montserrat;
+  }
+  h3 {
+    font-size: 20px;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+  p {
+    color: #316378;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 10px;
+    font-family: Montserrat;
+  }
+  dl {
+    margin: 0 0 5px 0;
+  }
+  dt {
+    font-weight: bold;
+    margin: 0 0 5px 0;
+    font-family: Montserrat;
+  }
+  dd {
+    margin: 0 0 15px 0;
+  }
+  a {
+    position: absolute;
+    bottom: 100px;
+    left: 450px;
+    font-size: 2em;
+    font-weight: 800;
+    color: royalblue;
+    overflow: hidden;
+  }
+  a {
+    background: linear-gradient(to right, midnightblue, midnightblue 50%, royalblue 50%);
+  }
+  a {
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    background-position: 100%;
+  }
+  a {
+    transition: background-position 275ms ease;
+  }
+  a:hover {
+    background-position: 0 100%;
+  }
+}
