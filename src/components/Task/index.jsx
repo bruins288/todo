@@ -1,7 +1,6 @@
 import React from "react";
 
 import Icon from "../Icon";
-
 import "./Task.scss";
 
 function Task({
@@ -17,7 +16,6 @@ function Task({
   const [isEditMode, setIsEditMode] = React.useState(false);
   const [idToEdit, setIdToEdit] = React.useState(null);
   const [inputValue, setInputValue] = React.useState(text);
-  const [isChecked, setIsChecked] = React.useState(completed);
 
   const handleEdit = () => {
     setIsEditMode(!isEditMode);
@@ -41,9 +39,8 @@ function Task({
     handleCancel();
   };
 
-  const checkedCompleted = () => {
-    setIsChecked(!isChecked);
-    onCompleted(id, listId, !isChecked);
+  const checkedCompleted = (e) => {
+    onCompleted(id, listId, e.target.checked);
   };
 
   return (
@@ -52,7 +49,7 @@ function Task({
         <input
           id={id}
           type="checkbox"
-          checked={isChecked}
+          checked={completed}
           onChange={checkedCompleted}
         />
         <label htmlFor={id}>

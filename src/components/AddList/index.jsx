@@ -2,7 +2,6 @@ import React from "react";
 
 import Badge from "../Badge";
 import Icon from "../Icon";
-
 import "./AddList.scss";
 
 function AddList({ icons, visibleForm, onVisibleForm, addItem, isLoading }) {

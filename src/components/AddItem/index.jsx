@@ -1,7 +1,6 @@
 import React from "react";
 
 import Icon from "../Icon";
-
 import "./AddItem.scss";
 
 function AddItem({ onVisibleForm }) {

@@ -1,7 +1,6 @@
 import React from "react";
 
 import AddItem from "../AddItem";
-
 import "./AddTask.scss";
 
 function AddTask({ list, addTask, isLoading }) {

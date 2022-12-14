@@ -29,11 +29,6 @@
       "name": "Дневник",
       "iconFileNameId": 9,
       "id": 6
-    },
-    {
-      "name": "Покупки",
-      "iconFileNameId": 7,
-      "id": 7
     }
   ],
   "tasks": [
@@ -102,12 +97,6 @@
       "listId": 6,
       "completed": false,
       "id": 15
-    },
-    {
-      "text": "Купить хлеб",
-      "listId": 7,
-      "completed": false,
-      "id": 16
     }
   ],
   "iconFileNames": [

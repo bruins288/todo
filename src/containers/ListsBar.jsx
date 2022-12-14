@@ -1,9 +1,8 @@
 import React from "react";
-import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import todoAPI from "../dal/TodoAPI";
 import { Icon, List, AddList, AddItem } from "../components";
-
 import "./ListsBar.scss";
 
 function ListsBar({ lists, activeItem, onAddList, onRemoveList }) {
@@ -15,50 +14,52 @@ function ListsBar({ lists, activeItem, onAddList, onRemoveList }) {
   let path = useLocation().pathname;
 
   React.useEffect(() => {
-    axios.get("http://localhost:4000/iconFileNames").then(({ data }) => {
-      setIcons(data);
-    });
+    (async () => {
+      try {
+        const { data } = await todoAPI.getIcons();
+        setIcons(data);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
   }, []);
 
-  const onRemove = (item) => {
+  const onRemove = async (item) => {
     if (window.confirm("Вы действительно хотите удалить список?")) {
-      axios
-        .delete("http://localhost:4000/lists/" + item.id)
-        .then(() => {
-          onRemoveList(item.id);
-        })
-        .finally(() => {
-          setSelectedAll(true);
-        });
+      try {
+        await todoAPI.deleteList(item.id);
+        onRemoveList(item.id);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setSelectedAll(true);
+      }
     }
   };
   const toggleVisibleForm = () => {
     setVisibleForm(!visibleForm);
   };
 
-  const onAdd = (inputValue, selectedIcon) => {
+  const onAdd = async (inputValue, selectedIcon) => {
     if (!inputValue) {
       alert("Введите название списка");
       return;
     }
     setIsLoading(true);
-    axios
-      .post("http://localhost:4000/lists", {
-        name: inputValue,
-        iconFileNameId: selectedIcon,
-      })
-      .then(({ data }) => {
-        let iconFileName = icons
-          .filter((icon) => icon.id === selectedIcon)
-          .shift();
-        let newList = { ...data, iconFileName, tasks: [] };
-        onAddList(newList);
-        setVisibleForm(!visibleForm);
-      })
-      .catch(() => alert("Не удалось добавить список"))
-      .finally(() => {
-        setIsLoading(false);
-      });
+    try {
+      let newFields = { name: inputValue, iconFileNameId: selectedIcon };
+      const { data } = await todoAPI.postList(newFields);
+      let iconFileName = icons
+        .filter((icon) => icon.id === selectedIcon)
+        .shift();
+      let newList = { ...data, iconFileName, tasks: [] };
+      onAddList(newList);
+      setVisibleForm(!visibleForm);
+    } catch (error) {
+      window.alert("Не удалось добавить список " + error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

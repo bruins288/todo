@@ -1,8 +1,7 @@
 import React from "react";
-import axios from "axios";
 
+import todoAPI from "../dal/TodoAPI";
 import { AddTask, Icon, Task } from "../components/";
-
 import "./Tasks.scss";
 
 function Tasks({
@@ -15,71 +14,68 @@ function Tasks({
 }) {
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const editTitle = () => {
+  const editTitle = async () => {
     let newTitle = window.prompt("Название списка", list.name);
     if (newTitle) {
-      axios
-        .patch("http://localhost:4000/lists/" + list.id, {
-          name: newTitle,
-        })
-        .then(() => onEditTitle(list.id, newTitle))
-        .catch(() => {
-          alert("Не удалось обновить название списка");
-        });
+      try {
+        await todoAPI.patchTitle(list.id, newTitle);
+        onEditTitle(list.id, newTitle);
+      } catch (error) {
+        window.alert("Не удалось обновить название списка " + error);
+      }
     }
   };
-  const addTask = (listId, inputValue) => {
+  const addTask = async (listId, inputValue) => {
     let newTask = {
       text: inputValue,
       listId: listId,
       completed: false,
     };
     setIsLoading(true);
-    axios
-      .post("http://localhost:4000/tasks", newTask)
-      .then(({ data }) => {
-        newTask.id = data.id;
-        onAddTask(list.id, newTask);
-      })
-      .catch(() => {
-        alert("Не удалось добавить задачу");
-      })
-      .finally(() => setIsLoading(false));
-  };
-
-  const removeTask = (taskId, listId) => {
-    if (window.confirm("Вы действительно хотите удалить задачу?")) {
-      setIsLoading(true);
-      axios
-        .delete("http://localhost:4000/tasks/" + taskId)
-        .then(() => {
-          onRemoveTask(taskId, listId);
-        })
-        .catch(() => alert("Не удалось удалить задачу"))
-        .finally(() => setIsLoading(false));
+    try {
+      const { data } = await todoAPI.postTask(newTask);
+      newTask.id = data.id;
+      onAddTask(list.id, newTask);
+    } catch (error) {
+      window.alert("Не удалось добавить задачу " + error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const editTask = (taskId, listId, textTask) => {
-    setIsLoading(true);
-    axios
-      .patch("http://localhost:4000/tasks/" + taskId, { text: textTask })
-      .then(() => {
-        onEditTask(taskId, listId, textTask);
-      })
-      .catch(() => alert("Не удалось обновить задачу"))
-      .finally(() => setIsLoading(false));
+  const removeTask = async (taskId, listId) => {
+    if (window.confirm("Вы действительно хотите удалить задачу?")) {
+      setIsLoading(true);
+      try {
+        await todoAPI.deleteTask(taskId);
+        onRemoveTask(taskId, listId);
+      } catch (error) {
+        window.alert("Не удалось удалить задачу " + error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
   };
 
-  const completedTask = (taskId, listId, isCompleted) => {
-    axios
-      .patch("http://localhost:4000/tasks/" + taskId, {
-        completed: isCompleted,
-      })
-      .then(() => {
-        onCompletedTask(taskId, listId, isCompleted);
-      })
-      .catch(() => window.alert("Не удалось отметить задачу"));
+  const editTask = async (taskId, listId, textTask) => {
+    setIsLoading(true);
+    try {
+      await todoAPI.patchTask(taskId, { text: textTask });
+      onEditTask(taskId, listId, textTask);
+    } catch (error) {
+      window.alert("Не удалось обновить задачу " + error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const completedTask = async (taskId, listId, isCompleted) => {
+    try {
+      await todoAPI.patchTask(taskId, { completed: isCompleted });
+      onCompletedTask(taskId, listId, isCompleted);
+    } catch (error) {
+      window.alert("Не удалось отметить задачу " + error);
+    }
   };
 
   return (

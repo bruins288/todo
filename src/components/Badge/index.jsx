@@ -1,7 +1,6 @@
 import React from "react";
 
 import Icon from "../Icon";
-
 import "./Badge.scss";
 
 function Badge({ icons, selected, setSelect }) {

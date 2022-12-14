@@ -1,6 +1,7 @@
 import React from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+
+import todoAPI from "../dal/TodoAPI.js";
 
 import Tasks from "../containers/Tasks.jsx";
 import ListsBar from "../containers/ListsBar.jsx";
@@ -13,11 +14,14 @@ function AppTodo() {
   let params = useParams();
 
   React.useEffect(() => {
-    axios
-      .get("http://localhost:4000/lists?_expand=iconFileName&_embed=tasks")
-      .then(({ data }) => {
+    (async () => {
+      try {
+        const { data } = await todoAPI.getListsWithTasks();
         setLists(data);
-      });
+      } catch (error) {
+        console.error(error);
+      }
+    })();
   }, []);
 
   React.useEffect(() => {
