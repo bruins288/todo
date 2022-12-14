@@ -1,76 +1,32 @@
 import React from "react";
-import axios from "axios";
 
-import List from "../List";
 import Badge from "../Badge";
 import Icon from "../Icon";
 
 import "./AddList.scss";
 
-function AddList({ icons, onAdd }) {
-  const [visiblePopup, setVisiblePopup] = React.useState(false);
+function AddList({ icons, visibleForm, onVisibleForm, addItem, isLoading }) {
   const [selectedIcon, setSelectedIcon] = React.useState(
     Array.isArray(icons) ? icons[0].id : null
   );
   const [inputValue, setInputValue] = React.useState("");
-  const [isLoading, setIsLoading] = React.useState(false);
+
   React.useEffect(() => {
     if (Array.isArray(icons)) setSelectedIcon(icons[0].id);
   }, [icons]);
 
-  const onSelected = (id) => {
-    setSelectedIcon(id);
-  };
-
-  const addList = () => {
-    if (!inputValue) {
-      alert("Введите название списка");
-      return;
-    }
-    setIsLoading(true);
-    axios
-      .post("http://localhost:4000/lists", {
-        name: inputValue,
-        iconFileNameId: selectedIcon,
-      })
-      .then(({ data }) => {
-        let iconFileName = icons
-          .filter((icon) => icon.id === selectedIcon)
-          .shift();
-        let newList = { ...data, iconFileName };
-        onAdd(newList);
-        onClose();
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
-
-  const onClose = () => {
-    setVisiblePopup(false);
-    setInputValue("");
-  };
-
   return (
     <div className="add-list">
-      <List
-        onClick={() => setVisiblePopup(true)}
-        items={[
-          {
-            id: 101,
-            name: "Добавить список",
-            iconFileName: { id: 101, fileName: "add.png" },
-            className: "list__addText",
-          },
-        ]}
-      />
-      {visiblePopup && (
+      {visibleForm && (
         <div className="add-list__popup">
           <Icon
             fileName={"close.png"}
             name="закрытие списка"
-            className="add-list__popup-close"
-            onClick={onClose}
+            className="popup-close"
+            onClick={() => {
+              onVisibleForm(false);
+              setInputValue("");
+            }}
           />
           <input
             className="field"
@@ -83,10 +39,18 @@ function AddList({ icons, onAdd }) {
             <Badge
               icons={icons}
               selected={selectedIcon}
-              setSelect={onSelected}
+              setSelect={setSelectedIcon}
             />
           )}
-          <button className="button" type="button" onClick={addList}>
+          <button
+            disabled={isLoading}
+            className="button"
+            type="button"
+            onClick={() => {
+              addItem(inputValue, selectedIcon);
+              setInputValue("");
+            }}
+          >
             {isLoading ? "Добавление..." : "Добавить"}
           </button>
         </div>

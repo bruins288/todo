@@ -1,0 +1,29 @@
+.tasks-form {
+  margin-top: 30px;
+  &__new {
+    display: flex;
+    align-items: center;
+    opacity: 0.8;
+    padding: 8px 12px;
+    cursor: pointer;
+    span {
+      font-size: 14px;
+      opacity: 0.4;
+      margin-left: 10px;
+    }
+    &:hover {
+      span {
+        opacity: 0.8;
+      }
+    }
+  }
+  &__block {
+    text-align: right;
+    .button {
+      margin-right: 10px;
+    }
+    .field {
+      margin-bottom: 15px;
+    }
+  }
+}

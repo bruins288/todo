@@ -1,6 +1,10 @@
 .list {
   $self: &;
   margin-bottom: 20px;
+  overflow-y: auto;
+  scrollbar-width: var(--scrollbarHeight);
+  scrollbar-color: var(--scrollbarThumb) var(--scrollbarBg);
+  height: 250px;
   &__addText {
     span {
       color: #767676;
@@ -44,6 +48,19 @@
       width: 160px;
       height: 1.2rem;
       white-space: nowrap;
+      margin-left: 10px;
     }
   }
+}
+.list::-webkit-scrollbar {
+  width: var(--scrollbarWidth);
+}
+.list::-webkit-scrollbar-track {
+  background: var(--scrollbarBg);
+  border-radius: var(--scrollbarBorderRadius);
+}
+.list::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbarThumb);
+  border-radius: var(--scrollbarBorderRadius);
+  border: var(--scrollbarBorder);
 }

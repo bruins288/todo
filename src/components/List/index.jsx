@@ -1,28 +1,13 @@
 import React from "react";
 import classNames from "classnames";
-import axios from "axios";
 
 import Icon from "../Icon";
 
 import "./List.scss";
 
-function List({
-  items,
-  isRemovable,
-  onClick,
-  onClickItem,
-  onRemove,
-  activeItem,
-}) {
-  const removeList = (item) => {
-    if (window.confirm("Вы действительно хотите удалить список?")) {
-      axios.delete("http://localhost:4000/lists/" + item.id).then(() => {
-        onRemove(item.id);
-      });
-    }
-  };
+function List({ items, isRemovable, onClickItem, remove, activeItem }) {
   return (
-    <ul className="list" onClick={onClick}>
+    <ul className="list">
       {/* Указание ключа обязательно он указывает React какой конкретно элемент в случае
       необходимости нужно обновить или удалить, связано с virtual dom */}
       {items.map((item, index) => (
@@ -43,7 +28,7 @@ function List({
               fileName={"close.png"}
               name="удаление"
               className="list__remove-icon"
-              onClick={() => removeList(item)}
+              onClick={() => remove(item)}
             />
           )}
         </li>

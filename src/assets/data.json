@@ -29,6 +29,11 @@
       "name": "Дневник",
       "iconFileNameId": 9,
       "id": 6
+    },
+    {
+      "name": "Покупки",
+      "iconFileNameId": 7,
+      "id": 7
     }
   ],
   "tasks": [
@@ -36,7 +41,7 @@
       "id": 1,
       "text": "Изучить HTML5",
       "listId": 1,
-      "completed": true
+      "completed": false
     },
     {
       "id": 2,
@@ -78,7 +83,7 @@
       "id": 8,
       "text": "Поиграть с детьми",
       "listId": 4,
-      "completed": false
+      "completed": true
     },
     {
       "id": 9,
@@ -90,76 +95,19 @@
       "id": 10,
       "text": "Отправить документы в ФНС по налоговому вычету",
       "listId": 5,
-      "completed": false
+      "completed": true
     },
     {
-      "text": "ssss",
+      "text": "Записать расписание Акробатики",
       "listId": 6,
       "completed": false,
-      "id": 11
+      "id": 15
     },
     {
-      "text": "ssss",
-      "listId": 4,
+      "text": "Купить хлеб",
+      "listId": 7,
       "completed": false,
-      "id": 12
-    }
-  ],
-  "addTasks": [
-    {
-      "id": 1,
-      "text": "Изучить семантические тэги",
-      "taskId": 1
-    },
-    {
-      "id": 2,
-      "text": "Изучить адаптивную верстку",
-      "taskId": 2
-    },
-    {
-      "id": 3,
-      "text": "Изучить SCSS",
-      "taskId": 2
-    },
-    {
-      "id": 4,
-      "text": "Изучить что такое замыкание и как применять",
-      "taskId": 3
-    },
-    {
-      "id": 5,
-      "text": "Изучить тип Date и как с ним работать",
-      "taskId": 3
-    },
-    {
-      "id": 6,
-      "text": "Изучить коллекции Map, Set и как с ними работать",
-      "taskId": 3
-    },
-    {
-      "id": 7,
-      "text": "Изучить тип Promise и как с ним работать",
-      "taskId": 3
-    },
-    {
-      "id": 8,
-      "text": "Изучить ReactJS Hooks (useState, useEffect, useContext и т.д.)",
-      "taskId": 4
-    },
-    {
-      "id": 9,
-      "text": "Изучить React Router",
-      "taskId": 4
-    },
-    {
-      "id": 10,
-      "text": "Изучить Redux (thunk, saga, observable)",
-      "taskId": 4
-    },
-    {
-      "id": 11,
-      "text": "Изучить MobX (observe, observable, action, computed, override)",
-      "taskId": 4
+      "id": 16
     }
   ],
   "iconFileNames": [

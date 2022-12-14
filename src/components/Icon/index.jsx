@@ -16,7 +16,7 @@ function Icon({ fileName, name, className, onClick }) {
       <img
         src={fileName ? require(`../../assets/icons/${fileName}`) : srcDefault}
         alt={`${name} иконка`}
-        title={`${name} иконка`}
+        title={`${name}`}
         onClick={onClick}
         className={className}
       />

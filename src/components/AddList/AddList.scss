@@ -2,7 +2,7 @@
   position: relative;
   &__popup {
     position: absolute;
-    top: 45px;
+    top: 5px;
     right: 5px;
     width: 85%;
     height: 140px;
@@ -20,10 +20,13 @@
       margin-left: -10px;
     }
   }
-  &__popup-close {
+  .popup-close {
     position: absolute;
-    top: -10px;
+    top: -5px;
     right: -5px;
     cursor: pointer;
+    width: 20px !important;
+    height: 20px !important;
+    opacity: 0.8;
   }
 }

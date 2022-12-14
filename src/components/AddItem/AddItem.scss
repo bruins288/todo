@@ -1,0 +1,17 @@
+.add-item {
+  display: flex;
+  align-items: center;
+  opacity: 0.8;
+  padding: 8px 12px;
+  cursor: pointer;
+  span {
+    font-size: 14px;
+    opacity: 0.4;
+    margin-left: 10px;
+  }
+  &:hover {
+    span {
+      opacity: 0.8;
+    }
+  }
+}

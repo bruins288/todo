@@ -12,22 +12,22 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-image-webp": "^0.8.0",
+    "react-router-dom": "^6.4.5",
     "react-scripts": "5.0.1"
-  },  
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
     "eject": "react-scripts eject",
     "db-json": "json-server ./src/assets/data.json --watch --port 4000"
-  },  
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
-    ]   
+    ]
   },
-  
   "browserslist": {
     "production": [
       ">0.2%",
@@ -40,5 +40,4 @@
       "last 1 safari version"
     ]
   }
-  
 }

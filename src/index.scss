@@ -1,4 +1,3 @@
-$height: calc(620px - 120px);
 :root {
   --scrollbarBg: #6dc4e1;
   --scrollbarThumb: #b2eaf9;
@@ -22,37 +21,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.todo {
-  display: flex;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 1000px;
-  height: 620px;
-  transform: translate(-50%, -50%);
-  /*свойство transform позволяет вам поворачивать, масштабировать, наклонять 
-  или сдвигать элемент. для любых элементов position: fixed; или position: absolute; 
-  которые он содержит. все элементы, шаблоны которых регулируются блочной моделью CSS,
-   кроме : неизменяемые инлайновые блоки, блоки таблица-колонка.
-   translate(x,y) Сдвигает элемент на новое место, перемещая относительно обычного 
-   положения вправо и вниз, используя координаты X и Y, не затрагивая при этом соседние 
-   элементы. Если нужно сдвинуть элемент влево или вверх, то нужно использовать 
-   отрицательные значения.*/
-  background-color: #7adbf6;
-  box-shadow: 1px 1px 20px #61dafb;
-  border-radius: 10px;
-  font-size: 14px;
-  &__sidebar {
-    width: 350px;
-    height: $height;
-    border-right: 1px solid #f1f1f1;
-    padding: 60px 20px;
-  }
-  &__tasks {
-    flex: 1;
-    padding: 60px;
-  }
-}
 .button,
 .field,
 .button-grey {
@@ -72,6 +40,12 @@ body {
   }
   &:active {
     transform: scale(0.97);
+  }
+  &:disabled {
+    background-color: #f4f6f8;
+    box-shadow: none;
+    cursor: none;
+    transform: none;
   }
 }
 .field {
@@ -94,5 +68,11 @@ body {
   }
   &:active {
     transform: scale(0.97);
+  }
+  &:disabled {
+    background-color: #f4f6f8;
+    box-shadow: none;
+    cursor: none;
+    transform: none;
   }
 }

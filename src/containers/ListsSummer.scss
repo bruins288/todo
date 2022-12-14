@@ -1,0 +1,66 @@
+.summer {
+  flex: 1;
+  margin: 20px;
+  padding: 10px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  border: 2px solid #b2eaf9;
+  text-align: center;
+  scrollbar-width: var(--scrollbarHeight);
+  scrollbar-color: var(--scrollbarThumb) var(--scrollbarBg);
+  &__title {
+    color: #316378;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 39px;
+    padding: 10px;
+    font-family: Montserrat;
+    .head-icon {
+      vertical-align: middle;
+      width: 28px !important;
+      height: 28px !important;
+    }
+  }
+  table {
+    margin: auto;
+    width: 100%;
+    border: 1px solid #b2eaf9;
+    border-radius: 0.25em;
+    box-shadow: 0px 1px 3px #23697c;
+    th {
+      text-align: center;
+      font-family: Montserrat;
+    }
+    td {
+      opacity: 0.8;
+      font-family: Montserrat;
+    }
+    .red,
+    .orange,
+    .green {
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .red {
+      color: red;
+    }
+    .orange {
+      color: orange;
+    }
+    .green {
+      color: green;
+    }
+  }
+}
+.summer::-webkit-scrollbar {
+  width: var(--scrollbarWidth);
+}
+.summer::-webkit-scrollbar-track {
+  background: var(--scrollbarBg);
+  border-radius: var(--scrollbarBorderRadius);
+}
+.summer::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbarThumb);
+  border-radius: var(--scrollbarBorderRadius);
+  border: var(--scrollbarBorder);
+}
